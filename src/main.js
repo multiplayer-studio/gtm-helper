@@ -2,11 +2,7 @@
   const cookieKey = document.currentScript.dataset.cookieKey;
   const cookiesApproved = document.cookie
     .split("; ")
-    .map(
-      (cookie) =>
-        cookie.includes(`${cookieKey}=all`) ||
-        cookie.includes(`${cookieKey}=all`)
-    )
+    .map((cookie) => cookie.includes(`${cookieKey}=all`))
     .includes(true);
   const GTMkey = document.currentScript.dataset.gtm;
   const GAkey = document.currentScript.dataset.ga;
@@ -51,14 +47,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
     exipiryDate.setTime(exipiryDate.getTime() + monthInMilliseconds * 3);
     exipiryDate.toUTCString();
     document.cookie = `${cookieKey}=all; expires=${exipiryDate}`;
-    document.querySelector('[gtm-helper-elem="banner"]').remove();
+    document.querySelector('[gtm-helper-elem="banner"]')?.remove();
 
     enableGTM();
     enableGA();
   }
 
   function ignoreCookies() {
-    document.querySelector('[gtm-helper-elem="banner"]').remove();
+    document.querySelector('[gtm-helper-elem="banner"]')?.remove();
   }
 
   function initializeGTMHelper() {
@@ -66,12 +62,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
 
     if (!cookiesApproved && cookieKey && cookieBanner) {
       cookieBanner.classList.toggle("hide");
-      document
-        .querySelector('[gtm-helper-action="ignore"]')
-        .addEventListener("click", ignoreCookies);
-      document
-        .querySelector('[gtm-helper-action="accept"]')
-        .addEventListener("click", initiateCookies);
+      document.querySelector('[gtm-helper-action="ignore"]')?.addEventListener("click", ignoreCookies);
+      document.querySelector('[gtm-helper-action="accept"]')?.addEventListener("click", initiateCookies);
     } else {
       enableGTM();
       enableGA();
