@@ -4,8 +4,8 @@
     .split("; ")
     .map((cookie) => cookie.includes(`${cookieKey}=all`))
     .includes(true);
-  const GTMkey = document.currentScript.dataset.gtm;
-  const GAkey = document.currentScript.dataset.ga || document.currentScript.dataset.gtm;
+  const GAkey = document.currentScript.dataset.ga;
+  const GTMkey = document.currentScript.dataset.gtm || document.currentScript.dataset.ga;
 
   function enableGTM() {
     if (GTMkey) {
